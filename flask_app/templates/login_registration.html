@@ -27,7 +27,8 @@
                 </div>
                 <div>
                     <label for="password" class="form-label mb-2 my-auto">Password:</label>
-                    <input type="password" name="password" class="form-control mb-4" value="{{ session['password'] }}">
+                    <input type="password" name="password" class="form-control mb-2" value="{{ session['password'] }}">
+                    <div class="form-text mb-4">Passwords must be between 8 and 20 characters and contain at least 1 number and 1 uppercase letter.</div>
                 </div>
                 <div>
                     <label for="confirm_password" class="form-label mb-2 my-auto">Confirm Password:</label>

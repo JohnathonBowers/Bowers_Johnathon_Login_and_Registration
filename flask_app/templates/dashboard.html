@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container col-lg-4">
+        <h1 class="mb-4 mt-4">Welcome, {{ user.first_name }}.</h1>
+        <p class="text-secondary mb-4">We hope you enjoy your stay at this luxurious web page. As we like to say around here, "Log in when you can. Log out when you must."</p>
+        <a href="/logout" class="btn btn-danger col-2">Log Out</a>
+    </div>
+</body>
+</html>

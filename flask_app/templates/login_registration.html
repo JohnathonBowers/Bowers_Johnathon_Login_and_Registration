@@ -10,7 +10,7 @@
 </head>
 <body>
     <div class="row justify-content-center my-4">
-        <div class="container border border-primary p-4 me-3 col-lg-4">
+        <div class="container p-4 me-3 col-lg-4">
             <h1 class="mb-4">Registration</h1>
             <form action="/register" method="post" class="justify-content-start">
                 <div>
@@ -18,34 +18,106 @@
                     <input type="text" name="first_name" class="form-control mb-4" value="{{ session['first_name'] }}">
                 </div>
                 <div>
+                    {% with names = get_flashed_messages(category_filter=['first_name']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div>
                     <label for="last_name" class="form-label mb-2 my-auto">Last Name:</label>
                     <input type="text" name="last_name" class="form-control mb-4" value="{{ session['last_name'] }}">
                 </div>
                 <div>
+                    {% with names = get_flashed_messages(category_filter=['last_name']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div>
                     <label for="email" class="form-label mb-2 my-auto">Email:</label>
                     <input type="text" name="email" class="form-control mb-4" value="{{ session['email'] }}">
+                </div>
+                <div>
+                    {% with names = get_flashed_messages(category_filter=['email']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
                 </div>
                 <div>
                     <label for="password" class="form-label mb-2 my-auto">Password:</label>
-                    <input type="password" name="password" class="form-control mb-2" value="">
+                    <input type="password" name="password" class="form-control mb-2">
                     <div class="form-text mb-4">Passwords must be between 8 and 20 characters and contain at least one number, one uppercase letter, and one special character (!@#$%^&*-?).</div>
                 </div>
                 <div>
+                    {% with names = get_flashed_messages(category_filter=['password']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div>
                     <label for="confirm_password" class="form-label mb-2 my-auto">Confirm Password:</label>
-                    <input type="text" name="confirm_password" class="form-control mb-4" value="">
+                    <input type="password" name="confirm_password" class="form-control mb-4">
+                </div>
+                <div>
+                    {% with names = get_flashed_messages(category_filter=['confirm_password']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-danger " type="submit" id="btn-reg">Register</button>
                 </div>
             </form>
         </div>
-        <div class="container border border-primary p-4 ms-3 col-lg-4">
-            <h1 class="mb-4">Login:</h1>
+        <div class="container p-4 ms-3 col-lg-4">
+            <h1 class="mb-4">Login</h1>
             <form action="/login" method="post" class="justify-content-start">
                 <div>
                     <label for="email" class="form-label mb-2 my-auto">Email:</label>
-                    <input type="text" name="email" class="form-control mb-4" value="{{ session['email'] }}">
+                    <input type="text" name="email" class="form-control mb-4" value="{{ session['login_email'] }}">
                 </div>
                 <div>
                     <label for="password" class="form-label mb-2 my-auto">Password:</label>
                     <input type="password" name="password" class="form-control mb-4" value="{{ session['password'] }}">
+                </div>
+                <div>
+                    {% with names = get_flashed_messages(category_filter=['login']) %}
+                        {% if names %}
+                        <ul class="flashes">
+                            {% for msg in names %}
+                                <li>{{ msg }}</li>
+                            {% endfor %}
+                        </ul>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-success" type="submit" id="btn-log">Login</button>
                 </div>
             </form>
         </div>

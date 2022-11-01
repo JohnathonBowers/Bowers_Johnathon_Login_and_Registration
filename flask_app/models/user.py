@@ -4,7 +4,8 @@ import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
-NAME_REGEX = re.compile('\d')
+# I adapted the name regex from part of the password regex below
+NAME_REGEX = re.compile('(?=.*?[0-9])')
 
 # I referred to uibakery.io for how to construct this password regex
 PWD_REGEX = re.compile('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*-?]).{8,20}$')
@@ -36,14 +37,14 @@ class User:
         if len(user['email']) < 1:
             flash('Email address required', 'email')
             is_valid = False
-        if EMAIL_REGEX.match(user['email']):
+        if not EMAIL_REGEX.match(user['email']):
             flash('Please enter a valid email address', 'email')
             is_valid = False
         if not PWD_REGEX.match(user['password']):
             flash('Please enter a password that meets the required criteria', 'password')
             is_valid = False
         if (user['confirm_password']) != (user['password']):
-            flash('Passwords do not match!', 'password')
+            flash('Passwords do not match!', 'confirm_password')
             is_valid = False
         return is_valid
 
@@ -64,5 +65,4 @@ class User:
     def get_by_user_id(cls, data):
         query = "SELECT * FROM users WHERE id = %(id)s"
         result = connectToMySQL('login_registration_schema').query_db(query, data)
-        user_object = cls(result)
-        return user_object
+        return cls(result[0])

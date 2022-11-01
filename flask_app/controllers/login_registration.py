@@ -57,13 +57,13 @@ def f_login():
 
 @app.route('/dashboard')
 def r_dashboard():
+    if not session:
+        return redirect ('/')
     if session['user_id']:
         print (session['user_id'])
         data = {'id': session['user_id']}
         user = User.get_by_user_id(data)
         return render_template('dashboard.html', user = user)
-    else:
-        return redirect ('/')
 
 @app.route('/logout')
 def logout():

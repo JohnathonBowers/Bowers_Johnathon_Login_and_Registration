@@ -27,18 +27,18 @@
                 </div>
                 <div>
                     <label for="password" class="form-label mb-2 my-auto">Password:</label>
-                    <input type="password" name="password" class="form-control mb-2" value="{{ session['password'] }}">
-                    <div class="form-text mb-4">Passwords must be between 8 and 20 characters and contain at least 1 number and 1 uppercase letter.</div>
+                    <input type="password" name="password" class="form-control mb-2" value="">
+                    <div class="form-text mb-4">Passwords must be between 8 and 20 characters and contain at least one number, one uppercase letter, and one special character (!@#$%^&*-?).</div>
                 </div>
                 <div>
                     <label for="confirm_password" class="form-label mb-2 my-auto">Confirm Password:</label>
-                    <input type="text" name="confirm_password" class="form-control mb-4" value="{{ session['confirm_password'] }}">
+                    <input type="text" name="confirm_password" class="form-control mb-4" value="">
                 </div>
             </form>
         </div>
         <div class="container border border-primary p-4 ms-3 col-lg-4">
             <h1 class="mb-4">Login:</h1>
-            <form action="/register" method="post" class="justify-content-start">
+            <form action="/login" method="post" class="justify-content-start">
                 <div>
                     <label for="email" class="form-label mb-2 my-auto">Email:</label>
                     <input type="text" name="email" class="form-control mb-4" value="{{ session['email'] }}">

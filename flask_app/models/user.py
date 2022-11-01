@@ -6,6 +6,9 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 NAME_REGEX = re.compile('\d')
 
+# I referred to uibakery.io for how to construct this password regex
+PWD_REGEX = re.compile('^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*-?]).{8,20}$')
+
 class User:
     def __init__ (self, data):
         self.id = data['id']
@@ -36,6 +39,13 @@ class User:
         if EMAIL_REGEX.match(user['email']):
             flash('Please enter a valid email address', 'email')
             is_valid = False
+        if not PWD_REGEX.match(user['password']):
+            flash('Please enter a password that meets the required criteria', 'password')
+            is_valid = False
+        if (user['confirm_password']) != (user['password']):
+            flash('Passwords do not match!', 'password')
+            is_valid = False
+        return is_valid
 
     @classmethod
     def get_by_email(cls, data):
@@ -44,3 +54,15 @@ class User:
         if len(result) < 1:
             return False
         return cls(result[0])
+    
+    @classmethod
+    def save(cls, data):
+        query = 'INSERT INTO users (first_name, last_name, email, password) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s);'
+        return connectToMySQL('login_registration_schema').query_db(query, data)
+    
+    @classmethod
+    def get_by_user_id(cls, data):
+        query = "SELECT * FROM users WHERE id = %(id)s"
+        result = connectToMySQL('login_registration_schema').query_db(query, data)
+        user_object = cls(result)
+        return user_object
